@@ -10,9 +10,9 @@
 
 - **Mitigations (A1‑M):**  
   - Enforce **IMDSv2 only**, disable IMDSv1 hops  
-  - Use **Azure AD-integrated AKS authentication**, RBAC policies :contentReference[oaicite:0]{index=0}  
+  - Use **Azure AD-integrated AKS authentication**, RBAC policies
   - Enable **Kubernetes audit logging** for CSR requests  
-  - Deploy **private AKS clusters** with no public API endpoint :contentReference[oaicite:1]{index=1}
+  - Deploy **private AKS clusters** with no public API endpoint
 
 ---
 
@@ -25,9 +25,9 @@
   Misconfigured internal services (LoadBalancers, Azure API) allow pod-to-node access.
 
 - **Mitigations (A2‑M):**  
-  - Configure Azure CNI with **Calico or Azure NPM** to enforce egress policies :contentReference[oaicite:2]{index=2}  
-  - Enable **Azure Policy/NFGs** to restrict pod egress on kubelet ports :contentReference[oaicite:3]{index=3}  
-  - Use internal-only load balancers with `loadBalancerSourceRanges` :contentReference[oaicite:4]{index=4}
+  - Configure Azure CNI with **Calico or Azure NPM** to enforce egress policies
+  - Enable **Azure Policy/NFGs** to restrict pod egress on kubelet ports
+  - Use internal-only load balancers with `loadBalancerSourceRanges`
 
 ---
 
@@ -40,8 +40,8 @@
   Attackers exploit privileged pods or hostProcess capabilities to break out.
 
 - **Mitigations (A3‑M):**  
-  - Implement **Pod Security Standards**: no privileged, hostNetwork, or hostPath :contentReference[oaicite:5]{index=5}  
-  - Use **Azure Policy** to block disallowed pod features :contentReference[oaicite:6]{index=6}  
+  - Implement **Pod Security Standards**: no privileged, hostNetwork, or hostPath
+  - Use **Azure Policy** to block disallowed pod features
   - Optionally deploy **gVisor** or Azure Fargate for stronger pod isolation
 
 ---
@@ -57,7 +57,7 @@
 - **Mitigations (B1‑M):**  
   - Apply **ACR trust policies** to allow only signed images  
   - Enforce **Pod Security Standards** to prevent runtime downloading  
-  - Deploy runtime detection tools (e.g., Defender for Containers, Sysdig) :contentReference[oaicite:7]{index=7}
+  - Deploy runtime detection tools (e.g., Defender for Containers, Sysdig)
 
 ---
 
@@ -71,7 +71,7 @@
 
 - **Mitigations (B2‑M):**  
   - Enforce immutable image tags and CI/CD pipeline approval checks  
-  - Block traffic to mining ports (e.g., 3333) via NetworkPolicy :contentReference[oaicite:8]{index=8}  
+  - Block traffic to mining ports (e.g., 3333) via NetworkPolicy
   - Use **Azure Policy** to prevent unapproved images
 
 ---
@@ -85,8 +85,8 @@
   Kernel-level rootkits on Azure VM nodes hide malicious activity.
 
 - **Mitigations (B3‑M):**  
-  - Use **hardened AKS node OS** (Azure Linux hardened, Bottlerocket) :contentReference[oaicite:9]{index=9}  
-  - Regularly apply node image updates and CVE patches :contentReference[oaicite:10]{index=10}  
+  - Use **hardened AKS node OS** (Azure Linux hardened, Bottlerocket)
+  - Regularly apply node image updates and CVE patches
   - Enable **Azure Defender for Hosts** and monitoring for kernel anomalies
 
 ---
@@ -100,8 +100,8 @@
   Pod accesses IMDS to retrieve node or other managed identity tokens.
 
 - **Mitigations (C1‑M):**  
-  - Block `169.254.169.254` with NetworkPolicy or Azure Firewall :contentReference[oaicite:11]{index=11}  
-  - Enforce **least-privilege** on identities and roles :contentReference[oaicite:12]{index=12}  
+  - Block `169.254.169.254` with NetworkPolicy or Azure Firewall
+  - Enforce **least-privilege** on identities and roles
   - Audit token access via Azure Monitor logs
 
 ---
@@ -115,8 +115,8 @@
   Container escape leads to host-level metadata/file access.
 
 - **Mitigations (C2‑M):**  
-  - Enforce **restricted pod specs** (no hostPath/hostNetwork, no privileges) :contentReference[oaicite:13]{index=13}  
-  - Scan for CVEs and patch nodes immediately :contentReference[oaicite:14]{index=14}  
+  - Enforce **restricted pod specs** (no hostPath/hostNetwork, no privileges)
+  - Scan for CVEs and patch nodes immediately
   - Deploy host-escape detection (Falco, Defender)
 
 ---
@@ -130,8 +130,8 @@
   Attackers tunnel via DNS or HTTPS through allowed destinations.
 
 - **Mitigations (C3‑M):**  
-  - Use **Azure Firewall/NAT Gateway + TLS inspection proxies** :contentReference[oaicite:15]{index=15}  
-  - Enable **Azure DNS Analytics & Defender** for exfil detection :contentReference[oaicite:16]{index=16}  
+  - Use **Azure Firewall/NAT Gateway + TLS inspection proxies** 
+  - Enable **Azure DNS Analytics & Defender** for exfil detection
   - Alert on suspicious egress patterns (high DNS volume, odd HTTP headers)
 
 ---
